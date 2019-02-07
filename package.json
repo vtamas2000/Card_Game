@@ -2,7 +2,7 @@
   "name": "Card_Game",
   "version": "1.0.0",
   "description": "Yet to be added",
-  "main": "",
+  "main": "app.js",
   "author": "VT",
   "dependencies": {
     "body-parser": "^1.18.3",
