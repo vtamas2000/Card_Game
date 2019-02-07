@@ -1,8 +1,8 @@
-var w = 30, h = 25, bs = 35, player = 1;
+var w = 160, h = 190 , bs = 35, player = 1;
 let board = [];
 
 function setup() {
-  createCanvas(1920, 1080);
+  createCanvas(windowWidth, windowHeight);
   ellipseMode(CORNER); //draw circles from their top left point
   textAlign(CENTER, CENTER)
   
@@ -51,8 +51,17 @@ function getWinner() {  //loops through rows, columns, diagonals, etc
 }*/ // this function is for connect 4
 
 function mousePressed() {
+  
+  let fs = false;
+
+  if(!fs)
+  {
+    fullscreen(true);
+    fs = true;
+  }
+  
   let x = int(mouseX / bs), y = int(mouseY / bs) //y = nextSpace(x);
-  if (y >= 0 && board[y][x] == 0 ) {
+  if (y >= 0 && board[y][x] == 0) {
     board[y][x] = player; 
     player = player == 1 ? 2 : 1; //switch to the other player (1->2  2->1)
   }
