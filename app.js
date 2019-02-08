@@ -15,6 +15,7 @@ const port = 3000;
 });*/
 
 var main = require('./routes/main.js');
+var login = require('./routes/login.js');
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -33,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 });	*/
 //app.use(express.static('public'));
 app.use('/', main);
+app.use('/login', login);
 	
 http.createServer(app).listen(port);
 
