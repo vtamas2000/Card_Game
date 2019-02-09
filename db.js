@@ -8,7 +8,7 @@ function connectDatabase(){
 			user: "root",
 			password: "pamacs2000",
 			port: "3306",
-			//database: ""
+			database: "MainDatabase"
 		});
 		db.connect(function(err){
 			if (!err){
