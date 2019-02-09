@@ -1,10 +1,18 @@
-var w = 160, h = 190 , bs = 35, player = 1;
+var w = 70, h = 70 , bs = 32, player = 1;
 let board = [];
-
+var button;
+var buttonclicked;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   ellipseMode(CORNER); //draw circles from their top left point
-  textAlign(CENTER, CENTER)
+  textAlign(CENTER, CENTER);
+  button = createButton("Restart");
+  button.position(windowWidth/2, windowHeight);
+  button.size(100, 30);
+  button.style("font-family","Comic Sans MS");
+  button.style("background-color", "green");
+  button.style("color", "yellow");
+  button.mouseClicked(RestartGame);
   
   for (let x = 0; x < h; x++) 
   {
@@ -49,27 +57,52 @@ function getWinner() {  //loops through rows, columns, diagonals, etc
   for (let y = h-1;y >= 0;y--) if (board[y][x]==0) return y;
   return -1;
 }*/ // this function is for connect 4
+var isdragging;
+function mouseDragged(event)
+{
+   isdragging = event.returnValue;
+   console.log(isdragging);
+}
 
-function mousePressed() {
+
+function mouseClicked() {
   
-  let fs = false;
+  /*let fs = false;
 
   if(!fs)
   {
     fullscreen(true);
     fs = true;
-  }
-  
+  }*/
   let x = int(mouseX / bs), y = int(mouseY / bs) //y = nextSpace(x);
-  if (y >= 0 && board[y][x] == 0) {
+  if (y >= 0 && board[y][x] == 0 && !isdragging && !buttonclicked) 
+  {
     board[y][x] = player; 
     player = player == 1 ? 2 : 1; //switch to the other player (1->2  2->1)
   }
+  
+}
+
+function RestartGame()
+{
+  for (let y = 0; y < h; y++)
+    for(let x = 0; x < w; x++)
+      board[y][x] = 0;
+  button.position(windowWidth/2, windowHeight);
+  button.size(100, 30);
+  let x = int(mouseX / bs), y = int(mouseY / bs)
+  board[y][x] = 0; 
+  player = 1;
+  buttonclicked = true;
 }
 
 function draw() {
+
   if (getWinner() == 0) 
   {
+    isdragging = false;
+    buttonclicked = false;
+    console.log(isdragging);
     for (let j = 0; j < h; j++) 
     {
       
@@ -91,16 +124,15 @@ function draw() {
   }
   else
   {
-    noStroke();
     background(0);
     fill(255);
-    text("Player "+getWinner()+" Wins! \n \n Press Enter to restart!", width/2,height/2);
-    if(keyIsPressed && keyCode == ENTER)
+    textSize(80);
+    text("Player "+getWinner()+" Wins!", width/2,height/2);
+    button.position(width/2 - 75,height/2 + 50);
+    button.size(200, 50);
+    /*if(keyIsPressed && keyCode == ENTER)
     {
-      player = 1;
-      for (let y = 0; y < h; y++)
-    		for(let x = 0; x < w; x++)
-          board[y][x] = 0;
-  	}  	
+     RestartGame();
+  	} */ 	
   }
 }
