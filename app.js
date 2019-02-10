@@ -16,6 +16,7 @@ const port = 3000;
 
 var main = require('./routes/main.js');
 var login = require('./routes/login.js');
+var register = require('./routes/register');
 var db = require('./db.js');
 
 app.engine('html', require('ejs').renderFile);
@@ -46,6 +47,7 @@ db.query('CREATE DATABASE IF NOT EXISTS MainDatabase', function(err){
 //app.use(express.static('public'));
 app.use('/', main);
 app.use('/login', login);
+app.use('/register', register);
 	
 http.createServer(app).listen(port);
 
