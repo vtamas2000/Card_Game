@@ -11,7 +11,15 @@
 	</style>
 	
 	<script type="text/javascript">
+		var checkIfThisShitFailedAgain;
+		<% if (typeof registerSuccess != undefined){ %>
+			checkIfThisShitFailedAgain = <%=registerSuccess%>
+		<% } %>
+		console.log(checkIfThisShitFailedAgain + " wow, didnt fail");
 		$(document).ready(function(){
+			if (checkIfThisShitFailedAgain == false){
+				alert("Username already in use");
+			}
 			var primaryPassword;
 			var passwordCheck;
 			$("#registerPassword").change(function(){

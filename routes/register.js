@@ -3,18 +3,20 @@ var fs = require('fs');
 var router = express.Router();
 var path = require('path');
 var db = require('../db.js');
-
 var bcrypt = require('bcrypt');
 
+var registerSuccessful;
+
 router.get('/', function(req, res){
-	res.render('../public/register.html');
+	res.render('../public/register.html', {
+		registerSuccess: registerSuccessful,
+	});
 });
 
 router.post('/', function(req, res){
 	var registerEmail = req.body.registerEmail;
 	var registerPassword = req.body.registerPassword;
 	var registerUsername = req.body.registerUsername;
-	var registerSuccessful;
 	console.log("New registration, email: " + registerEmail + " password: " + registerPassword + " username: " + registerUsername);
 
 	var checkIfUserExistsQuery = "SELECT * FROM users WHERE username = ?";
@@ -41,11 +43,13 @@ router.post('/', function(req, res){
 				});
 			});
 			res.render('../public/registerSuccess.html');
+			registerSuccessful = undefined;
 		} else {
-			res.render('../public/register.html',{
+			res.render('../public/register.html', {
 				registerSuccess: registerSuccessful,
 			});
 			console.log(registerSuccessful + " else statement fired");
+			registerSuccessful = undefined;
 		};
 	});
 });
