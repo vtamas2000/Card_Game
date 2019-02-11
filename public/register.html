@@ -8,7 +8,31 @@
 
 	<style>
         body {background-color: rgb(238, 229, 169);}        
-        </style>
+	</style>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var primaryPassword;
+			var passwordCheck;
+			$("#registerPassword").change(function(){
+				primaryPassword = $("#registerPassword").val();
+			});
+			$("#doubleCheckPassword").change(function(){
+				passwordCheck = $("#doubleCheckPassword").val();
+				if (primaryPassword != passwordCheck) {
+					$("#alertForPassword").show();
+					$("#alertForPassword").attr({
+						"class": "alert alert-danger"
+					});
+					$("#alertForPassword").html("<p>Passwords do not match</p>");
+					$("#submitButton").attr("disabled", "disabled");
+				} else {
+					$("#alertForPassword").hide();
+					$("#submitButton").removeAttr("disabled");
+				};
+			});
+		});
+	</script>
 
 
 </head>
@@ -33,9 +57,15 @@
 				<label for="registerPassword">Your password:</label>
 				<input type="password" name="registerPassword" id="registerPassword" placeholder="Password" required>
 			</div>
+			<div class="form-group">
+				<label for="registerPassword">Password again:</label>
+				<input type="password" name="" id="doubleCheckPassword" placeholder="Password again" required>
+				<div id="alertForPassword">
+				</div>
+			</div>
 			
 			</div>
-			<button class="btn btn-primary" type="submt">Register</button>
+			<button class="btn btn-primary" type="submt" id="submitButton">Register</button>
 		</form>
 	</div>
 

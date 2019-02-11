@@ -14,26 +14,40 @@ router.post('/', function(req, res){
 	var registerEmail = req.body.registerEmail;
 	var registerPassword = req.body.registerPassword;
 	var registerUsername = req.body.registerUsername;
+	var registerSuccessful;
 	console.log("New registration, email: " + registerEmail + " password: " + registerPassword + " username: " + registerUsername);
 
-	/*Write the database query here
-	The registered email is stored in registerEmail
-	The registered password is stored in regsterPassword
-	The registered username is stored in registerUsername */
-	
+	var checkIfUserExistsQuery = "SELECT * FROM users WHERE username = ?";
+	db.query(checkIfUserExistsQuery, [registerUsername], function(err, result){
+		if (err) throw err;
+		if (result.length > 0){
+			console.log(result);
+			registerSuccessful = false;
+		} else {
+			registerSuccessful = true;
+		};
+		console.log(registerSuccessful + " registration");
 
-	//this is hashing and adding new user to database with hashed password:
-	const saltRounds = 10;
-	bcrypt.hash(registerPassword, saltRounds, function(err, hash){
-		const sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)" ;
-
-		db.query(sql, [registerUsername, hash, registerEmail], function (err, result) {
-			if (err) throw err;
-			console.log("1 record inserted");
-		});
-	});	
-
-	res.render('../public/registerSuccess.html');
+		console.log(registerSuccessful + " wow, still not good eh");
+		if (registerSuccessful){
+			console.log(registerSuccessful + " if statement fired");
+			const saltRounds = 10;
+			bcrypt.hash(registerPassword, saltRounds, function(err, hash){
+				const sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)" ;
+		
+				db.query(sql, [registerUsername, hash, registerEmail], function (err, result) {
+					if (err) throw err;
+					console.log("1 record inserted");
+				});
+			});
+			res.render('../public/registerSuccess.html');
+		} else {
+			res.render('../public/register.html',{
+				registerSuccess: registerSuccessful,
+			});
+			console.log(registerSuccessful + " else statement fired");
+		};
+	});
 });
 
 module.exports = router;
