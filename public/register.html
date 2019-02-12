@@ -11,14 +11,14 @@
 	</style>
 	
 	<script type="text/javascript">
-		var checkIfThisShitFailedAgain;
+		var registerSuccessful;
 		<% if (typeof registerSuccess != undefined){ %>
-			checkIfThisShitFailedAgain = <%=registerSuccess%>
+			registerSuccessful = <%=registerSuccess%>
 		<% } %>
-		console.log(checkIfThisShitFailedAgain + " wow, didnt fail");
+		console.log(registerSuccessful + " wow, didnt fail");
 		$(document).ready(function(){
-			if (checkIfThisShitFailedAgain == false){
-				alert("Username already in use");
+			if (!registerSuccessful){
+				alert("Username or E-mail already in use");
 			}
 			var primaryPassword;
 			var passwordCheck;

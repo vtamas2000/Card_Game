@@ -19,8 +19,8 @@ router.post('/', function(req, res){
 	var registerUsername = req.body.registerUsername;
 	console.log("New registration, email: " + registerEmail + " password: " + registerPassword + " username: " + registerUsername);
 
-	var checkIfUserExistsQuery = "SELECT * FROM users WHERE username = ?";
-	db.query(checkIfUserExistsQuery, [registerUsername], function(err, result){
+	var checkIfUserExistsQuery = "SELECT * FROM users WHERE username = ? OR email = ?";
+	db.query(checkIfUserExistsQuery, [registerUsername, registerEmail], function(err, result){
 		if (err) throw err;
 		if (result.length > 0){
 			console.log(result);
