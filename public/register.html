@@ -15,7 +15,6 @@
 		<% if (typeof registerSuccess != undefined){ %>
 			registerSuccessful = <%=registerSuccess%>
 		<% } %>
-		console.log(registerSuccessful + " wow, didnt fail");
 		$(document).ready(function(){
 			if (!registerSuccessful){
 				alert("Username or E-mail already in use");

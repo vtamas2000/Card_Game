@@ -17,7 +17,6 @@ router.post('/', function(req, res){
 	var registerEmail = req.body.registerEmail;
 	var registerPassword = req.body.registerPassword;
 	var registerUsername = req.body.registerUsername;
-	console.log("New registration, email: " + registerEmail + " password: " + registerPassword + " username: " + registerUsername);
 
 	var checkIfUserExistsQuery = "SELECT * FROM users WHERE username = ? OR email = ?";
 	db.query(checkIfUserExistsQuery, [registerUsername, registerEmail], function(err, result){
@@ -28,11 +27,9 @@ router.post('/', function(req, res){
 		} else {
 			registerSuccessful = true;
 		};
-		console.log(registerSuccessful + " registration");
 
-		console.log(registerSuccessful + " wow, still not good eh");
 		if (registerSuccessful){
-			console.log(registerSuccessful + " if statement fired");
+			console.log("Successfully registered " + registerUsername);
 			const saltRounds = 10;
 			bcrypt.hash(registerPassword, saltRounds, function(err, hash){
 				const sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)" ;
@@ -48,7 +45,7 @@ router.post('/', function(req, res){
 			res.render('../public/register.html', {
 				registerSuccess: registerSuccessful,
 			});
-			console.log(registerSuccessful + " else statement fired");
+			console.log(registerUsername + " tried to register, username was already in use");
 			registerSuccessful = undefined;
 		};
 	});
