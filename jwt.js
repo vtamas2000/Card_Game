@@ -15,4 +15,20 @@ module.exports = {
         };
         return jwt.sign(payload, privateKey, signOptions);
     },
+
+    verify: function(token){
+        var verifyOptions = {
+            expiresIn:  "1d",
+            algorithm:  ["RS256"]
+        };
+        try {
+            return jwt.verify(token, publicKey, verifyOptions);
+        } catch (err) {
+            return false;
+        }
+    },
+
+    decode: function(token){
+        return jwt.decode(token, {complete: true});
+    }
 }
