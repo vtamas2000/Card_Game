@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Yet to be added",
   "main": "app.js",
-  "author": "VT",
+  "author": "VT, HP",
   "dependencies": {
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
@@ -12,7 +12,8 @@
     "fs": "0.0.1-security",
     "jsonwebtoken": "^8.4.0",
     "mysql": "^2.16.0",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "socketio-jwt": "^4.5.0"
   },
   "repository": {
     "type": "git",

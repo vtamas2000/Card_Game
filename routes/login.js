@@ -27,7 +27,8 @@ router.post('/', function(req, res){
 		if (loginSuccess){
 			bcrypt.compare(loginPassword, result[0].password, function(err, success){
 				if(success){
-					var token = jwt.sign({user: loginUsername});
+					var dateOfSign = new Date();
+					var token = jwt.sign({user: loginUsername, date: dateOfSign});
 					res.render('../public/mainmenu.html');
 					console.log("Successfully logged in " + loginUsername + " " + token);
 				} else {

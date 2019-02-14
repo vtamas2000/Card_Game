@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var app = express();
 var path = require('path');
+var io = require('socket.io')(http);
 
 const port = 3000;
 
@@ -11,6 +12,8 @@ var main = require('./routes/main.js');
 var login = require('./routes/login.js');
 var register = require('./routes/register');
 var db = require('./db.js');
+
+app.set('socketio', io);
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
