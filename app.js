@@ -5,6 +5,7 @@ var app = express();
 var http = require('http').Server(app);
 var path = require('path');
 var io = require('socket.io')(http);
+var cookieParser = require('cookie-parser');
 
 const port = 3000;
 global.io = io;
@@ -12,7 +13,7 @@ global.io = io;
 var main = require('./routes/main.js');
 var login = require('./routes/login.js');
 var register = require('./routes/register');
-var db = require('./db.js');
+var db = require('./middlewares/db.js');
 
 //app.set('socketio', io);
 
@@ -20,7 +21,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({ extended: true })); 
-
+app.use(cookieParser());
 
 //IMPORTANT!!!!!!!!
 //RUN THIS CODE ONLY ONCE, THEN DELETE IT
@@ -45,6 +46,7 @@ db.query('CREATE DATABASE IF NOT EXISTS MainDatabase', function(err){
 app.use('/', main);
 app.use('/login', login);
 app.use('/register', register);
+
 	
 http.listen(port);
 

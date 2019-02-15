@@ -2,7 +2,7 @@ var express = require('express');
 var fs = require('fs');
 var router = express.Router();
 var path = require('path');
-var db = require('../db.js');
+var db = require('../middlewares/db.js');
 var bcrypt = require('bcrypt');
 
 var registerSuccessful;

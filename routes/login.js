@@ -3,15 +3,16 @@ var fs = require('fs');
 var router = express.Router();
 var path = require('path');
 var bcrypt = require('bcrypt');
-var db = require('../db.js');
-var jwt = require('../jwt.js');
+var db = require('../middlewares/db.js');
+var jwt = require('../middlewares/jwt.js');
 
-io.on('connection', function(socket){
+/*io.on('connection', function(socket){
 	console.log("valami");
-});
+});*/
 
 router.get('/', function(req, res){
 	res.render('../public/login.html');
+	console.log("Cookies :  ", req.cookies.token_cookie);
 });
 
 router.post('/', function(req, res){
@@ -33,6 +34,7 @@ router.post('/', function(req, res){
 				if(success){
 					var dateOfSign = new Date();
 					var token = jwt.sign({user: loginUsername, date: dateOfSign});
+					res.cookie("token_cookie" , token);
 					res.render('../public/mainmenu.html');
 					console.log("Successfully logged in " + loginUsername + " " + token);
 				} else {
