@@ -10,7 +10,7 @@ module.exports = {
             /*issuer: options.issuer,
             subject: options.subject,
             audience: options.audience,*/
-            expiresIn: "1d",
+            expiresIn: "60s",
             algorithm: "RS256"
         };
         return jwt.sign(payload, privateKey, signOptions);
