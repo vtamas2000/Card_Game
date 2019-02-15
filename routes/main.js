@@ -7,8 +7,9 @@ router.get('/', function(req, res){
 	res.render('../public/mainmenu.html');
 });
 
-router.get('/play', function(req, res){
+router.post('/play', function(req, res){
 	res.render('../public/index.html');
+	console.log("Post request to play");
 });
 
 module.exports = router;
