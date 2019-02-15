@@ -6,6 +6,10 @@ var bcrypt = require('bcrypt');
 var db = require('../db.js');
 var jwt = require('../jwt.js');
 
+io.on('connection', function(socket){
+	console.log("valami");
+});
+
 router.get('/', function(req, res){
 	res.render('../public/login.html');
 });

@@ -1,19 +1,20 @@
-var http = require('http');
 var express = require('express');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var app = express();
+var http = require('http').Server(app);
 var path = require('path');
 var io = require('socket.io')(http);
 
 const port = 3000;
+global.io = io;
 
 var main = require('./routes/main.js');
 var login = require('./routes/login.js');
 var register = require('./routes/register');
 var db = require('./db.js');
 
-app.set('socketio', io);
+//app.set('socketio', io);
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -45,7 +46,7 @@ app.use('/', main);
 app.use('/login', login);
 app.use('/register', register);
 	
-http.createServer(app).listen(port);
+http.listen(port);
 
 console.log("Server running...");
 	
