@@ -76,7 +76,7 @@ function newPiece(data){
   if (data.y >= 0 && board[data.y][data.x] == 0 && !data.isdragging && !data.buttonclicked) 
   {
     board[data.y][data.x] = data.player; 
-    data.player = data.player == 1 ? 2 : 1; //switch to the other player (1->2  2->1)
+    player = player == 1 ? 2 : 1; //switch to the other player (1->2  2->1)
   }
 
   //inserting draw here
@@ -114,6 +114,24 @@ function newPiece(data){
     button.position(width/2 - 75,height/2 + 50);
     button.size(200, 50);
   }
+
+  if(data.buttonclicked){
+    for (let y = 0; y < h; y++)
+    for(let x = 0; x < w; x++)
+      board[y][x] = 0;
+  
+    button.position(windowWidth/2, windowHeight);
+    button.size(100, 30);
+    let x = int(mouseX / bs), y = int(mouseY / bs)
+    board[y][x] = 0; 
+    player = 1;
+
+    for (let j = 0; j < h; j++)   
+      for (let i = 0; i < w; i++) {
+        fill(255);
+         rect(i*bs, j*bs, bs, bs);
+       } 
+  }
 }
 
 //////////////////////////////////////////////////////
@@ -128,14 +146,14 @@ function mouseClicked() {
     isdragging: isdragging,
     buttonclicked: buttonclicked
   }
-  socket.emit('mouse', data);
+  
 
-  if (y >= 0 && board[y][x] == 0 && !isdragging && !buttonclicked) 
+  if (data.y >= 0 && board[data.y][data.x] == 0 && !data.isdragging && !data.buttonclicked) 
   {
-    board[y][x] = player; 
+    board[data.y][data.x] = data.player; 
     player = player == 1 ? 2 : 1; //switch to the other player (1->2  2->1)
   }
-
+  socket.emit('mouse', data);
   //inserting draw here
 
   if (getWinner() == 0) 
