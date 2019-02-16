@@ -33,9 +33,15 @@ router.post('/', function(req, res){
 			bcrypt.compare(loginPassword, result[0].password, function(err, success){
 				if(success){
 					var dateOfSign = new Date();
+					var deleteblacklisted = "DELETE FROM blacklist WHERE expireDate < ?";
+					db.query(deleteblacklisted, [dateOfSign], function(err, result){
+						if(err) throw err;
+						console.log("num of rows affacted: " + result.affectedRows);
+					});					
 					var token = jwt.sign({user: loginUsername, date: dateOfSign});
 					res.cookie("token_cookie" , token);
-					res.render('../public/mainmenu.html');
+					//res.render('../public/mainmenu.html');
+					res.redirect("/");
 					console.log("Successfully logged in " + loginUsername + " " + token);
 				} else {
 					console.log("Failed to log in " + loginUsername);
@@ -47,6 +53,7 @@ router.post('/', function(req, res){
 			console.log("Username does not exist " + loginUsername);
 		};	
 	});
+		
 });
 
 module.exports = router;

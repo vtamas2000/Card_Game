@@ -42,7 +42,7 @@ db.query('CREATE DATABASE IF NOT EXISTS MainDatabase', function(err){
 		console.log("Users table created");
 	});
 
-	var createBlacklistQuery = 'CREATE TABLE IF NOT EXISTS blacklist (id INT AUTO_INCREMENT PRIMARY KEY, expireDate DATE, token VARCHAR(500))';
+	var createBlacklistQuery = 'CREATE TABLE IF NOT EXISTS blacklist (id INT AUTO_INCREMENT PRIMARY KEY, expireDate DATETIME, token VARCHAR(500))';
 	db.query(createBlacklistQuery, function (err, result){
 		if (err) throw err;
 		console.log("Blacklist table created");

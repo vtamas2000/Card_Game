@@ -24,9 +24,15 @@ router.get('/logout', verify, function(req, res, next){
 	var decoded = jwt.decode(token, {complete: true});
 	var dateOfIssue = new Date(decoded.payload.date);
 	var dateWhenExpiresInMillisecs = dateOfIssue.getTime() + millisecs;
-	var dateWhenExpires = new Date()
-	console.log("Expire date: " + val1 + " " );
+	var dateWhenExpires = new Date(dateWhenExpiresInMillisecs);
+
+	console.log("Expire date: " + dateWhenExpires + " " ); // this is now showing the correct time
 	var blacklistQuery = 'INSERT INTO blacklist (expireDate, token) VALUES (?, ?)';
+	db.query(blacklistQuery, [dateWhenExpires, token], function (err, result) {
+		if (err) throw err;
+		console.log("1 record inserted into blacklist");
+	});
+	res.clearCookie("token_cookie");
 	res.redirect('/login');
 });
 
