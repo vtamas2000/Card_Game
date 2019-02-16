@@ -2,6 +2,9 @@ var w = 70, h = 70 , bs = 32, player = 1;
 let board = [];
 var button;
 var buttonclicked;
+
+var socket;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   ellipseMode(CORNER); //draw circles from their top left point
@@ -13,6 +16,10 @@ function setup() {
   button.style("background-color", "green");
   button.style("color", "yellow");
   button.mouseClicked(RestartGame);
+  
+  socket = io('/play');
+  socket.on('mouse', newPiece);
+  
   
   for (let x = 0; x < h; x++) 
   {
@@ -61,20 +68,43 @@ var isdragging;
 function mouseDragged(event)
 {
    isdragging = event.returnValue;
-   console.log(isdragging);
+   //console.log(isdragging);
+}
+
+function newPiece(data){
+  
+  for (let j = 0; j < h; j++) 
+  { 
+    
+     for (let i = 0; i < w; i++) 
+      {
+    
+        if (board[j][i]>0)
+        {
+          //fill(board[j][i]==1 ? 255 : 0, board[j][i]==2 ? 255 : 0, 0);
+          fill(0);
+          stroke(100)
+          textSize(bs/2)
+          text(board[j][i] == 1 ? 'X': 'O',i*bs, j*bs, bs, bs);
+        }
+      }
+  }
+  
+  
 }
 
 
 function mouseClicked() {
   
-  /*let fs = false;
-
-  if(!fs)
-  {
-    fullscreen(true);
-    fs = true;
-  }*/
   let x = int(mouseX / bs), y = int(mouseY / bs) //y = nextSpace(x);
+  
+  var data = {
+    x: x,
+    y: y,
+    player: player
+  }
+  socket.emit('mouse', data);
+
   if (y >= 0 && board[y][x] == 0 && !isdragging && !buttonclicked) 
   {
     board[y][x] = player; 
@@ -102,7 +132,7 @@ function draw() {
   {
     isdragging = false;
     buttonclicked = false;
-    console.log(isdragging);
+   // console.log(isdragging);
     for (let j = 0; j < h; j++) 
     {
       

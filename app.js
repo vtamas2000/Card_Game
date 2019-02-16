@@ -10,9 +10,10 @@ var cookieParser = require('cookie-parser');
 const port = 3000;
 global.io = io;
 
+var play = require('./routes/play.js');
 var main = require('./routes/main.js');
 var login = require('./routes/login.js');
-var register = require('./routes/register');
+var register = require('./routes/register.js');
 var db = require('./middlewares/db.js');
 
 //app.set('socketio', io);
@@ -52,6 +53,7 @@ db.query('CREATE DATABASE IF NOT EXISTS MainDatabase', function(err){
 app.use('/', main);
 app.use('/login', login);
 app.use('/register', register);
+app.use('/play', play);
 
 	
 http.listen(port);

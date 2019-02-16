@@ -14,10 +14,10 @@ router.get('/', function(req, res){
 	res.render('../public/mainmenu.html');
 });
 
-router.post('/play', verify, function(req, res, next){
+/*router.post('/play', verify, function(req, res, next){
 	res.render('../public/index.html');
 	console.log("Post request to play");
-});
+});*/
 
 router.get('/logout', verify, function(req, res, next){
 	var token = req.cookies.token_cookie;
