@@ -36,7 +36,7 @@ router.post('/', function(req, res){
 					var deleteblacklisted = "DELETE FROM blacklist WHERE expireDate < ?";
 					db.query(deleteblacklisted, [dateOfSign], function(err, result){
 						if(err) throw err;
-						console.log("num of rows affacted: " + result.affectedRows);
+						console.log("Deleted from blacklist: " + result.affectedRows  + " record");
 					});					
 					var token = jwt.sign({user: loginUsername, date: dateOfSign});
 					res.cookie("token_cookie" , token);

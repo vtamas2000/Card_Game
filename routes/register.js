@@ -39,7 +39,7 @@ router.post('/', function(req, res){
 					console.log("1 record inserted");
 				});
 			});
-			res.render('../public/registerSuccess.html');
+			res.redirect('/');
 			registerSuccessful = undefined;
 		} else {
 			res.render('../public/register.html', {
