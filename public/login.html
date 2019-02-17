@@ -8,7 +8,7 @@
 	<script src = "./socket.io/socket.io.js"></script>
 
 	<style>
-        body {background-color: rgb(238, 229, 169);}        
+        body {background-color: white;}        
 	</style>
 	<script type="text/javascript">
 		//var socket = io();
@@ -17,39 +17,34 @@
 
 </head>
 <body>
-	<div align = "center" >
-	<div style="position: absolute; align-content: center; top: 20%; width: 100%; height: 100%;">
-		<h1 class="text-center">Login to begin your game</h1>
-		<br>
+	<div>
 	
-	
-	<div class="container-fluid" >
-		<form action="/login" method="post">
-			<div class="form-group">
-				<label for="loginUsername">Your Username:</label>
-				<input type="text" name="loginUsername" id="loginUsername" placeholder="Username" required>
-			</div>
-			<div class="form-group">
-				<label for="loginPassword">Your password:</label>
-				<input type="password" name="loginPassword" id="loginPassword" placeholder="Password" required>
-			</div>
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" name="stayLoggedIn"> Stay logged in
-				</label>
-			</div>
-			<button class="btn btn-primary" type="submt">Login</button>
-		</form>
-		<br>
-		<p>Not a user?</p>
-		<a id="registerButton" href="/register" title="link to registering">
-			<div align = "center" >
-				<button style="position: absolute; align-content: center; bottom: 60%; width: 10%; right: 45%" class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
-			</div>
-		</a>
+	<div class="card text-left" style="width: 25%; font-size: 130%; margin: 0%; position: absolute; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%);">
+		<div class="card-body">
+			<a id="registerButton" href="/register" title="link to registering" class="float-right btn btn-outline-primary btn-lg">Register</a>
+			<h1 class="card-title">Sign in</h1>
+			<br>
+			<form action="/login" method="post">
+				<div class="form-group">
+					<label for="loginUsername">Your Username:</label>
+					<input type="text" name="loginUsername" id="loginUsername" placeholder="Username" required>
+				</div>
+				<div class="form-group">
+					<label for="loginPassword">Your password:</label>
+					<input type="password" name="loginPassword" id="loginPassword" placeholder="*******" required>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="stayLoggedIn"> Stay logged in
+					</label>
+				</div>
+				<br>
+				<button class="btn btn-primary btn-block btn-lg" type="submt">Login</button>
+			</form>
+			<br>
+		</div>
 	</div>
 
-</div>
 </div>
 </body>
 </html>
