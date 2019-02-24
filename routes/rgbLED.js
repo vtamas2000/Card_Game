@@ -3,7 +3,7 @@ var router = express.Router();
 var verify = require('../middlewares/verify.js');
 
 var Gpio = require('pigpio').Gpio,
-ledRed = new Gpio(4, {mode: Gpio.OUTPUT}),
+ledRed = new Gpio(22, {mode: Gpio.OUTPUT}),
 ledGreen = new Gpio(17, {mode: Gpio.OUTPUT}),
 ledBlue = new Gpio(27, {mode: Gpio.OUTPUT}), 
 redRGB = 0,
@@ -19,7 +19,7 @@ var nsp = io.of('/rgbLED');
 
 nsp.on('connection', newConnection);
 
-router.get('/', function(req, res, next){
+router.get('/', verify, function(req, res, next){
 
 	res.render('../public/rgb.html');
 	console.log('get request to rgb');
