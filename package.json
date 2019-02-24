@@ -13,6 +13,7 @@
     "fs": "0.0.1-security",
     "jsonwebtoken": "^8.4.0",
     "mysql": "^2.16.0",
+    "pigpio": "^1.2.1",
     "socket.io": "^2.2.0",
     "socketio-jwt": "^4.5.0"
   },

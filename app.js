@@ -15,7 +15,7 @@ var main = require('./routes/main.js');
 var login = require('./routes/login.js');
 var register = require('./routes/register.js');
 var db = require('./middlewares/db.js');
-
+var rgbLed = require('./routes/rgbLED.js');
 //app.set('socketio', io);
 
 app.engine('html', require('ejs').renderFile);
@@ -54,7 +54,7 @@ app.use('/', main);
 app.use('/login', login);
 app.use('/register', register);
 app.use('/play', play);
-
+app.use('/rgbLED', rgbLed);
 	
 http.listen(port);
 

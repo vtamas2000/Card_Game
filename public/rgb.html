@@ -1,0 +1,36 @@
+ <!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+
+<p>Pick a color: <input type="color" id="pickColor"></p>
+<script src="https://www.w3schools.com/lib/w3color.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<script>
+
+var socket = io('/rgbLED');
+var rgb = w3color("rgb(0,0,0)");
+
+window.addEventListener("load", function(){
+	var picker = document.getElementById("pickColor");
+	
+	picker.addEventListener("input", function(){
+	rgb.red = w3color(this.value).red;
+	rgb.green = w3color(this.value).green;
+	rgb.blue = w3color(this.value).blue;
+	console.log(rgb);
+	socket.emit("rgbLed", rgb);
+	
+  });
+
+});
+
+</script>
+
+
+</body>
+
+
+
+</html>
