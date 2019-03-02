@@ -3,9 +3,9 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 <style>
-        body {background-color: rgb(160, 27, 60);}
-        h1   {color: rgb(25, 187, 33);}
-        </style>
+        body {background-color: rgb(255, 255, 255);}
+        /* h1   {color: rgb(25, 187, 33);} */
+</style>
 
 <head>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -27,7 +27,7 @@
 
 </head>
 <body>
-    <div align="center">
+    <!-- <div align="center">
            
         <div style= "position: absolute; bottom: 40%; width: 30%; right:35%;">
                 <div>
@@ -60,10 +60,68 @@
     
             </div>
     
-        </div>
+        </div> -->
     
-        <div style="position: absolute; bottom: 3%; right: 3%; width: 50%; text-align:right; color: gold;">
-                A game made by: Péter Hangyál and Tamás Veres          
-         </div>
+        <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+            <ui class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">
+                        <button class="btn btn-outline-light btn-lg btn-block">Main Menu</button>
+                    </a>                    
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/rgbLED">
+                        <button class="btn btn-outline-light btn-lg btn-block">Raspberry pi</button>
+                    </a>                    
+                </li>
+            </ui>
+            <ui class="navbar-nav mr-sm-2">
+                <li class="nav-item active">
+                    <a id="registerButton" href="/register" title="link to registering">
+                        <button class="btn btn-outline-light btn-lg btn-block" type="submit">Register</button>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a id="loginButton" href="/login" title="link to logging in">
+                        <button class="btn btn-outline-light btn-lg btn-block" type="submit">Login</button>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a id="logoutButton" href="/logout" title="link to play game">
+                        <button class="btn btn-outline-light btn-lg btn-block" type="submit">Logout</button>
+                    </a>
+                </li>
+            </ui>
+        </nav>
+
+        <br>
+
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-sm">
+                    <div class="card" style="width: 100%">
+                        <img class="card-img-top" src="./otherFiles/gameScreenshots/connect5.png">
+                        <div class="card-body">
+                            <h1 class="card-title">Connect 5</h1>
+                            <p class="card-text">
+                                This is the fantastic Connect 5! You can play it alone (well, it's not much fun that way,
+                                but I don't judge you), or with friends. Your devices have to be connected to 
+                                the same Wi-Fi network, though.
+                            </p>
+                            <a id="playButton" href="/play" title="link to play game">
+                                <button class="btn btn-primary btn-lg" type="submit">Play</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div style="position: absolute; bottom: 3%; right: 3%; width: 50%; text-align:right;">
+                Games made by: Péter Hangyál and Tamás Veres          
+        </div>
 </body>
 </html>
