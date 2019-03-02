@@ -15,6 +15,7 @@ var main = require('./routes/main.js');
 var login = require('./routes/login.js');
 var register = require('./routes/register.js');
 var db = require('./middlewares/db.js');
+var linewars = require('./routes/linewars.js');
 
 //app.set('socketio', io);
 
@@ -54,6 +55,7 @@ app.use('/', main);
 app.use('/login', login);
 app.use('/register', register);
 app.use('/play', play);
+app.use('/linewars', linewars);
 
 	
 http.listen(port);

@@ -21,6 +21,7 @@
         };
         $("document").ready(function(){
             $("#playButton").click(changeGetToPost("playButton", "/play"));
+            //$("#linewarsPlayButton").click(changeGetToPost("linewarsPlayButton", "/linewars"));
         });
 
     </script>
@@ -115,7 +116,17 @@
                     </div>
                 </div>
                 <div class="col-sm">
-                    
+                    <div class="card" style="width: 100%">
+                        <div class="card-body">
+                            <h1 class="card-title">LineWars</h1>
+                            <p class="card-text">
+                                Under heavy development
+                            </p>
+                            <a id="linewarsPlayButton" href="/linewars" title="link to play game">
+                                <button class="btn btn-primary btn-lg" type="submit">Play</button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
