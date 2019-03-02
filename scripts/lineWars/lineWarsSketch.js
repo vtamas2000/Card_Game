@@ -1,8 +1,20 @@
+var point;
+
 function setup() {
-    createCanvas(600, 600);
-    
+    createCanvas(windowWidth, windowHeight);
+    background(45);
+    point = new Point(50, 50);
+    point.show();
 }
 
 function draw() {
-    background(45);
+    //point.show();
+    var connection = new Connection(0,0,30,30);
+    connection.show();
+    //point.show();
+}
+
+function mousePressed() {
+    //var point = new Point(mouseX, mouseY);
+    point.select();
 }
