@@ -2,10 +2,12 @@ function Point(x, y){
     this.x = x;
     this.y = y;
     this.r = 40;
+    this.col = color(52, 26, 219)
     this.selected = false;
     
     this.show = function(){
-        fill(255);
+        noStroke();
+        fill(this.col);
         ellipse(this.x, this.y, this.r, this.r);
     }
 
@@ -13,8 +15,8 @@ function Point(x, y){
         var d = dist(this.x, this.y, mouseX, mouseY);
         if (d < this.r){
             this.selected = true;
-            fill(255);
-            ellipse(100, 100, 70, 70);
+            this.col = color(26, 219, 99);
+            this.r = 60;
         }
     }
 }
@@ -27,6 +29,7 @@ function Connection(startX, startY, endX, endY) {
 
     this.show = function() {
         stroke(255); 
+        strokeWeight(5);
         line(this.startX, this.startY, this.endX, this.endY); 
     }
 }
