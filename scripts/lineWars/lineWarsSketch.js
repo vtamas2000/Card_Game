@@ -11,19 +11,12 @@ function setup() {
 function draw() {
     for(var i = 0; i < points.length; i++){
         points[i].show();
+        points[i].update(connections);
     }
 
     for(var i = 0; i < connections.length; i++){
         connections[i].show();
-        for(var j = i + 1; j < connections.length; j++){
-            var checkIfActuallyIntersects = connections[i].intersects(connections[j]).doesIntersect;
-            if(checkIfActuallyIntersects){
-                var x = connections[i].intersects(connections[j]).intersectionX;
-                var y = connections[i].intersects(connections[j]).intersectionY;
-                var newIntersection = new Intersection(x, y);
-                intersections.push(newIntersection);
-            }
-        }
+        connections[i].update();
     }
 
     for(var i = 0; i < intersections.length; i++){
@@ -34,6 +27,8 @@ function draw() {
 function mousePressed() {
     var pointToConnect1;
     var pointToConnect2;
+    intersections = [];
+
     for(var i = 0; i < points.length; i++){
         points[i].select();
         if (points[i].selected && !pointToConnect1){
@@ -44,7 +39,7 @@ function mousePressed() {
     }
 
     if (pointToConnect1 && pointToConnect2){
-        var connection = new Connection(pointToConnect1.x, pointToConnect1.y, pointToConnect2.x, pointToConnect2.y);
+        var connection = new Connection(pointToConnect1, pointToConnect2);
         connections.push(connection);
         pointToConnect1.selected = false;
         pointToConnect2.selected = false;
@@ -52,8 +47,20 @@ function mousePressed() {
         pointToConnect2 = undefined;
     }
 
+    for(var i = 0; i < connections.length; i++){
+        for(var j = i + 1; j < connections.length; j++){
+            if(connections[i].intersects(connections[j]).doesIntersect){
+                var x = connections[i].intersects(connections[j]).intersectionX;
+                var y = connections[i].intersects(connections[j]).intersectionY;
+                var newIntersection = new Intersection(x, y);
+                intersections.push(newIntersection);
+            }
+        }
+    }
+
     //console.log(connections);
-    console.log(points);
+    //console.log(points);
+    console.log(intersections);
 }
 
 function keyPressed() {

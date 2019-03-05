@@ -3,9 +3,11 @@ function Point(x, y){
     this.y = y;
     this.r = 40;
     this.pulseR = this.r;
-    this.col = color(52, 26, 219);
+    this.col = color(52, 26, 219, 200);
     this.selected = false;
+    this.power = 0;
     
+    //Visuals go here
     this.show = function(){
         noStroke();
         fill(this.col);
@@ -13,8 +15,27 @@ function Point(x, y){
         if (this.selected){
             this.col = color(26, 219, 99);
         } else {
-            this.col = color(52, 26, 219)
+            this.col = color(52, 26, 219, 10);
         }
+    }
+
+    //Math goes here
+    this.update = function(connectionsArray) {
+        this.power = 0;
+        for(var i = 0; i < connectionsArray.length; i++){
+            var d1 = dist(this.x, this.y, connectionsArray[i].startX, connectionsArray[i].startY);
+            var d2 = dist(this.x, this.y, connectionsArray[i].endX, connectionsArray[i].endY);
+
+            if(d1 < this.r){
+                this.power++;
+            }
+
+            if(d2 < this.r){
+                this.power++;
+            }
+        }
+
+        console.log(this.power);
     }
 
     this.select = function(){
@@ -34,17 +55,28 @@ function Point(x, y){
     } */
 }
 
-function Connection(startX, startY, endX, endY) {
-    this.startX = startX;
-    this.startY = startY;
-    this.endX = endX;
-    this.endY = endY;
-    this.length = dist(startX, startY, endX, endY);
+function Connection(startPoint, endPoint) {
+    this.startX = startPoint.x;
+    this.startY = startPoint.y;
+    this.endX = endPoint.x;
+    this.endY = endPoint.y;
+    this.startPoint = startPoint;
+    this.endPoint = endPoint;
+    this.power = 0;
+    this.length = dist(this.startX, this.startY, this.endX, this.endY);
+    this.col = color(52, 26, 219);
 
+    //Visuals go here
     this.show = function() {
-        stroke(255); 
+        stroke(this.col); 
         strokeWeight(5);
         line(this.startX, this.startY, this.endX, this.endY); 
+    }
+
+    //Math goes here
+    this.update = function() {
+        this.power = this.startPoint.power + this.endPoint.power;
+        console.log("line power " + this.power);
     }
 
     this.intersects = function(other) {
