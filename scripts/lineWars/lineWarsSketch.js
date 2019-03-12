@@ -1,14 +1,18 @@
 var points = [];
 var connections = [];
 var intersections = [];
+var turnsMade = 0;
+var player1Color;
+var player2Color;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    background(45);
-    //point = new Point(50, 50);
+    player1Color = color(52, 26, 219, 255);
+    player2Color = color(232, 110, 69, 255);
 }
 
 function draw() {
+    background(45);
     for(var i = 0; i < points.length; i++){
         points[i].show();
         points[i].update(connections);
@@ -64,9 +68,14 @@ function mousePressed() {
 }
 
 function keyPressed() {
-    if (keyCode === SHIFT){
-        var newPoint = new Point(mouseX, mouseY);
+    if (key == 'y'){
+        var newPoint = new Point(mouseX, mouseY, 1, player1Color);
         points.push(newPoint);
-        console.log(points);
+        //console.log(points);
+    }
+
+    if (key == 'x'){
+        var newPoint = new Point(mouseX, mouseY, 2, player2Color);
+        points.push(newPoint);
     }
 }

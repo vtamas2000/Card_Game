@@ -1,11 +1,12 @@
-function Point(x, y){
+function Point(x, y, player, col) {
     this.x = x;
     this.y = y;
     this.r = 40;
     this.pulseR = this.r;
-    this.col = color(52, 26, 219, 200);
+    this.col = col;
     this.selected = false;
     this.power = 0;
+    this.player = player;
     
     //Visuals go here
     this.show = function(){
@@ -15,7 +16,7 @@ function Point(x, y){
         if (this.selected){
             this.col = color(26, 219, 99);
         } else {
-            this.col = color(52, 26, 219, 10);
+            this.col = col;
         }
     }
 
@@ -76,7 +77,7 @@ function Connection(startPoint, endPoint) {
     //Math goes here
     this.update = function() {
         this.power = this.startPoint.power + this.endPoint.power;
-        console.log("line power " + this.power);
+        //console.log("line power " + this.power);
     }
 
     this.intersects = function(other) {
@@ -114,12 +115,18 @@ function Connection(startPoint, endPoint) {
     }
 }
 
-function Intersection(x, y){
+function Intersection(x, y) {
     this.x = x;
     this.y = y;
 
     this.show = function() {
         fill(155);
         ellipse(this.x, this.y, 30, 30);
+    }
+}
+
+function ValidMove(point1, point2) {
+    if(point1.player !== point2.player){
+        return false;
     }
 }
