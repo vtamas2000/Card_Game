@@ -20,7 +20,7 @@ function draw() {
 
     for(var i = 0; i < connections.length; i++){
         connections[i].show();
-        connections[i].update();
+        connections[i].update(intersections);
     }
 
     for(var i = 0; i < intersections.length; i++){
@@ -56,7 +56,7 @@ function mousePressed() {
             if(connections[i].intersects(connections[j]).doesIntersect){
                 var x = connections[i].intersects(connections[j]).intersectionX;
                 var y = connections[i].intersects(connections[j]).intersectionY;
-                var newIntersection = new Intersection(x, y);
+                var newIntersection = new Intersection(x, y, connections[i], connections[j]);
                 intersections.push(newIntersection);
             }
         }
@@ -71,7 +71,7 @@ function keyPressed() {
     if (key == 'y'){
         var newPoint = new Point(mouseX, mouseY, 1, player1Color);
         points.push(newPoint);
-        //console.log(points);
+        //console.log(1/0);
     }
 
     if (key == 'x'){
