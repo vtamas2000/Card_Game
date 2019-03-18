@@ -7,35 +7,41 @@ function Point(x, y, player, col) {
     this.selected = false;
     this.power = 1;
     this.player = player;
+    this.firstMoveMade = false;
     
+    if(this.player === -1){
+        this.power = 0;
+    }
+
     //Visuals go here
     this.show = function(){
         noStroke();
         fill(this.col);
         ellipse(this.x, this.y, this.r, this.r);
-        if (this.selected){
+        /* if (this.selected){
             this.col = color(26, 219, 99);
         } else {
             this.col = col;
-        }
+        } */
     }
 
     //Math goes here
     this.update = function(connectionsArray) {
-        this.power = 0;
-        for(var i = 0; i < connectionsArray.length; i++){
-            var d1 = dist(this.x, this.y, connectionsArray[i].startX, connectionsArray[i].startY);
-            var d2 = dist(this.x, this.y, connectionsArray[i].endX, connectionsArray[i].endY);
+        if (this.firstMoveMade){
+            this.power = 0;
+            for(var i = 0; i < connectionsArray.length; i++){
+                var d1 = dist(this.x, this.y, connectionsArray[i].startX, connectionsArray[i].startY);
+                var d2 = dist(this.x, this.y, connectionsArray[i].endX, connectionsArray[i].endY);
 
-            if(d1 < this.r){
-                this.power++;
-            }
+                if(d1 < this.r){
+                    this.power++;
+                }
 
-            if(d2 < this.r){
-                this.power++;
+                if(d2 < this.r){
+                    this.power++;
+                }
             }
         }
-
         //console.log(this.power);
     }
 
@@ -43,6 +49,7 @@ function Point(x, y, player, col) {
         var d = dist(this.x, this.y, mouseX, mouseY);
         if (d < this.r){
             this.selected = true;
+            this.firstMoveMade = true;
             /* this.col = color(26, 219, 99);
             this.r = 60; */
         }
@@ -67,6 +74,7 @@ function Connection(startPoint, endPoint) {
     this.nrOfIntersections = 0;
     this.length = dist(this.startX, this.startY, this.endX, this.endY);
     this.col = color(52, 26, 219);
+    this.belongsTo;
 
     //Visuals go here
     this.show = function() {
@@ -133,8 +141,73 @@ function Intersection(x, y, connection1, connection2) {
     }
 }
 
-function ValidMove(point1, point2) {
-    if(point1.player !== point2.player){
+function validMove(thisTurn, point1, point2) {
+    //Need to check everything for pont1 and point2, as well, 
+    //because their succession matters in pointsArray
+
+    if(point1.player !== thisTurn && point2.player !== thisTurn){
         return false;
+    } else if(point1.player === point2.player){
+        return true;
+    } else if(point1.player === -1 || point2.player === -1){
+        return true;
+    } else if(point1.player !== point2.player){
+        if(point1.power > point2.power && point1.player === thisTurn){
+            console.log("Fired");
+            return true;
+        } else if (point2.power > point1.power && point2.player === thisTurn){
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+function makeMove(nrOfPlayers, pointsArray, connectionsArray, intersectionsArray){
+    //turnsMade is a global variable in the main program!!!
+
+    var thisPlayer = turnsMade % nrOfPlayers;
+    var pointToConnect1 = undefined;
+    var pointToConnect2 = undefined;
+
+    for(var i = 0; i < pointsArray.length; i++){
+        pointsArray[i].select();
+        if (pointsArray[i].selected && !pointToConnect1){
+            pointToConnect1 = pointsArray[i];
+        } else if (pointsArray[i].selected && !pointToConnect2){
+            pointToConnect2 = pointsArray[i];
+        }
+    }
+
+    console.log(thisPlayer);
+    if(pointToConnect1 && pointToConnect2){
+        if(validMove(thisPlayer, pointToConnect1, pointToConnect2)){
+            console.log("Move valid");
+            var connection = new Connection(pointToConnect1, pointToConnect2);
+            connectionsArray.push(connection);
+            pointToConnect1.selected = false;
+            pointToConnect2.selected = false;
+            turnsMade++;
+            /* pointToConnect1 = undefined;
+            pointToConnect2 = undefined; */
+        } else {
+            pointToConnect1.selected = false;
+            pointToConnect2.selected = false;
+            console.log("Move invalid");
+        }
+    }
+
+    intersectionsArray = [];
+    for(var i = 0; i < connectionsArray.length; i++){
+        for(var j = i + 1; j < connectionsArray.length; j++){
+            if(connectionsArray[i].intersects(connectionsArray[j]).doesIntersect){
+                var x = connectionsArray[i].intersects(connectionsArray[j]).intersectionX;
+                var y = connectionsArray[i].intersects(connectionsArray[j]).intersectionY;
+                var newIntersection = new Intersection(x, y, connectionsArray[i], connectionsArray[j]);
+                intersectionsArray.push(newIntersection);
+            }
+        }
     }
 }

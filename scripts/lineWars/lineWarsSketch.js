@@ -4,23 +4,25 @@ var intersections = [];
 var turnsMade = 0;
 var player1Color;
 var player2Color;
+var neutralColor;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
     player1Color = color(52, 26, 219, 255);
     player2Color = color(232, 110, 69, 255);
+    neutralColor = color(26, 219, 99);
 }
 
 function draw() {
     background(45);
     for(var i = 0; i < points.length; i++){
         points[i].show();
-        points[i].update(connections);
+        //points[i].update(connections);
     }
 
     for(var i = 0; i < connections.length; i++){
         connections[i].show();
-        connections[i].update(intersections);
+        //connections[i].update(intersections);
     }
 
     for(var i = 0; i < intersections.length; i++){
@@ -29,7 +31,18 @@ function draw() {
 }
 
 function mousePressed() {
-    var pointToConnect1;
+
+    makeMove(2, points, connections, intersections);
+
+    for(var i = 0; i < points.length; i++){
+        points[i].update(connections);
+    }
+
+    for(var i = 0; i < connections.length; i++){
+        connections[i].update(intersections);
+    }
+
+    /* var pointToConnect1;
     var pointToConnect2;
     intersections = [];
 
@@ -60,22 +73,29 @@ function mousePressed() {
                 intersections.push(newIntersection);
             }
         }
-    }
+    } */
 
     //console.log(connections);
     //console.log(points);
-    console.log(intersections);
+    //console.log(intersections);
 }
 
 function keyPressed() {
+    //The count of players start at zero - the neutral point equals -1
+    
     if (key == 'y'){
-        var newPoint = new Point(mouseX, mouseY, 1, player1Color);
+        var newPoint = new Point(mouseX, mouseY, 0, player1Color);
         points.push(newPoint);
         //console.log(1/0);
     }
 
     if (key == 'x'){
-        var newPoint = new Point(mouseX, mouseY, 2, player2Color);
+        var newPoint = new Point(mouseX, mouseY, 1, player2Color);
+        points.push(newPoint);
+    }
+
+    if (key == 'c'){
+        var newPoint = new Point(mouseX, mouseY, -1, neutralColor);
         points.push(newPoint);
     }
 }
