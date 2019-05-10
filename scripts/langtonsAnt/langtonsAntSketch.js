@@ -1,24 +1,32 @@
 var antX;
 var antY;
 var grid;
+//var input = "rll";
+var rule = input.split("");
+var colors = new Array(rule.length);
 
 //UP, RiGHT, DOWN, LEFT
 var dir;
 
 function setup(){
-    //createCanvas(windowWidth, windowHeight);
-    createCanvas(400, 400);
+    createCanvas(windowWidth, windowHeight);
+    //createCanvas(400, 400);
+    for(var i = 0; i < colors.length; i++){
+        var r = floor(random(255));
+        var g = floor(random(255));
+        var b = floor(random(255));
+        colors[i] = color(r, g, b);
+    }
     antX = floor(width/2);
     antY = floor(height/2);
     grid = make2DArray(width, height);
     dir = 0;
     //background(255);
-    console.log(antX + " " + antY);
 }
 
 function draw(){
     strokeWeight(1);
-    for(var i = 0; i < 1000; i++){
+    /*for(var i = 0; i < 1000; i++){
         if (grid[antX][antY] == 0){
             turn("r");
             grid[antX][antY] = 1;
@@ -32,6 +40,22 @@ function draw(){
         if(grid[antX][antY] == 1){
             stroke(color(0));
         }
+
+        point(antX, antY);
+        moveForward(dir);
+    }*/
+
+    for(var i = 0; i < 1000; i++){
+        var state = grid[antX][antY];
+        turn(rule[state]);
+        state++;
+        if(state > rule.length - 1){
+            state = 0;
+        }
+
+        grid[antX][antY] = state;
+        
+        stroke(color(colors[state]));
 
         point(antX, antY);
         moveForward(dir);

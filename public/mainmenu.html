@@ -162,19 +162,35 @@
                     <div class="card" style="width: 100%">
                         <div class="card-body">
                             <h1 class="card-title">Langton's Ant</h1>
-                            <p class="card-text">
-                                Under heavy development
+                            <p class="card-text text-justify">
+                                Aaaand this is the famous Langton's Ant! Believe me it's super cool! What? 
+                                You haven't heard about it? Click here really fast to go to the Wikipedia page!
                             </p>
-                            <a id="langtonsantPlayButton" href="/langtonsant" title="link to play game">
-                                <button class="btn btn-primary btn-lg" type="submit">Play</button>
-                            </a>
+                            <p class="card-text text-justify">
+                                Below you can tell the rule to the ant. With the default settings the ant turns right
+                                at one color and left at the other. But check this out! You can set your own rules.
+                                Type as many "r" (for right) and "l" (for left) letters as you wish, and the ant will follow
+                                these rules. Please don't write spaces or any other characters, or it simply won't work.
+                            </p>
+                            <p class="card-text text-justify">
+                                Write here:
+                            </p>
+                            <br>
+                            <div class="form-group">
+                                <form action="/langtonsant" method="POST">
+                                    <input type="text" name="langtonsAntRule" id="langtonsAntRule" value="rl" placeholder="rl">
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary btn-lg" type="submit">Play</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div style="position: absolute; bottom: 3%; right: 3%; width: 50%; text-align:right;">
+        <br>
+        <div style="position:  bottom: 3%; right: 3%; left: 5%; width: 50%; text-align:left;">
                 Games made by: Péter Hangyál and Tamás Veres          
         </div>
 </body>
