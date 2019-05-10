@@ -8,7 +8,7 @@ router.post('/', verify, function(req, res){
     {
         resolution: resolution_
     });
-    console.log("Get request to gameoflife");
+    console.log("Post request to gameoflife");
 });
 
 module.exports = router;
