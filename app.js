@@ -18,6 +18,7 @@ var db = require('./middlewares/db.js');
 var linewars = require('./routes/linewars.js');
 var gameoflife = require('./routes/gameoflife.js');
 var langtonsant = require('./routes/langtonsant.js');
+var mandelbrot = require('./routes/mandelbrot.js');
 
 //app.set('socketio', io);
 
@@ -60,6 +61,7 @@ app.use('/play', play);
 app.use('/linewars', linewars);
 app.use('/gameoflife', gameoflife);
 app.use('/langtonsant', langtonsant);
+app.use('/mandelbrot', mandelbrot);
 
 	
 http.listen(port);
