@@ -210,6 +210,50 @@
 
                 </div>
             </div>
+
+            <br>
+            <br>
+            <div class="col-sm">
+                <div class="card" style="width: 100%">
+                    <div class="card-body">
+                        <h1 class="card-title">Monte-Carlo-PI-Integration</h1>
+                        <p class="card-text text-justify">
+                            This is a visualization of the famous Monte-Carlo Integration to approximate the value of Pi.
+                            If you haven't heard about it, you can check it out via this link
+                            <a href="https://en.wikipedia.org/wiki/Monte_Carlo_integration" target="_blank">here</a> 
+                            really fast to go to the Wikipedia page!
+                        </p>
+                        <p class="card-text text-justify">
+                            Below you can set the number of little circles and the number of iterations ("number of experiments")
+                        </p>
+                       
+                        
+                        <div class="form-group">
+                            <form action="/monte-carlo-pi" method="POST">
+                                <p class="card-text text-justify">
+                                    Write number of little circles here:
+                                </p>
+                               
+                                <input type="text" name="PiCircles" id="PiCircles" value="1000" placeholder="1000">
+                                <br>
+                                <br>
+                                <p class="card-text text-justify">
+                                    Write number of iterations here:
+                                </p>
+                                
+                                <input type="text" name="PiIterations" id="PiIterations" value="1000" placeholder="1000">
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary btn-lg" type="submit">Play</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
         <br>
         <div style="position:  bottom: 3%; right: 3%; left: 5%; width: 50%; text-align:left;">
