@@ -22,7 +22,7 @@ function verifyuser(req, res, next)
                 var decoded = jwt.verify(req.cookies.token_cookie, publicKey);
                 req.userdata = decoded;
                 console.log("req_token_cookie " + req.cookies.token_cookie);
-                next();
+                return next();
             }
             catch(err)
             {
@@ -31,11 +31,11 @@ function verifyuser(req, res, next)
                     error: err
                 });*/
                 //console.log("not verified");
-                res.redirect('/login');
+                return res.redirect('/login');
         
             }
         } else {
-            res.redirect('/login');
+            return res.redirect('/login');
         };
     });
     

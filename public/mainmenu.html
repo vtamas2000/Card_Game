@@ -108,11 +108,24 @@
                             <p class="card-text text-justify">
                                 This is the fantastic Connect 5! You can play it alone (well, it's not much fun that way,
                                 but I don't judge you), or with friends. Your devices have to be connected to 
-                                the same Wi-Fi network, though.
+                                the same Wi-Fi network, though. To play with your chosen friend, you have to connect to the same room.
                             </p>
-                            <a id="playButton" href="/play" title="link to play game">
+                            <p class="card-text text-justify">
+                                Room:
+                            </p>
+                            
+                            <div class="form-group">
+                                <form action="/play" method="POST">
+                                    <input type="text" name="RoomName" id="RoomName" value="1" placeholder="1">
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary btn-lg" type="submit">Play</button>
+                                </form>
+                            </div>
+
+                            <!-- <a id="playButton" href="/play" title="link to play game">
                                 <button class="btn btn-primary btn-lg" type="submit">Play</button>
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                 </div>
