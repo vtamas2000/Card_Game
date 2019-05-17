@@ -19,6 +19,7 @@ var linewars = require('./routes/linewars.js');
 var gameoflife = require('./routes/gameoflife.js');
 var langtonsant = require('./routes/langtonsant.js');
 var mandelbrot = require('./routes/mandelbrot.js');
+var montecarlopi = require('./routes/montecarlopi.js');
 
 //app.set('socketio', io);
 
@@ -62,7 +63,7 @@ app.use('/linewars', linewars);
 app.use('/gameoflife', gameoflife);
 app.use('/langtonsant', langtonsant);
 app.use('/mandelbrot', mandelbrot);
-
+app.use('/monte-carlo-pi', montecarlopi);
 	
 http.listen(port);
 
