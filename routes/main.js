@@ -11,7 +11,10 @@ const millisecs = 60000;
 //const expireTime = new Date(secs * 1000);
 
 router.get('/', function(req, res){
-	res.render('../public/mainmenu.html');
+	var cookieUsername = req.cookies.username_cookie;
+	res.render('../public/mainmenu.html',{
+		username: cookieUsername
+	});
 });
 
 /*router.post('/play', verify, function(req, res, next){
@@ -33,6 +36,7 @@ router.get('/logout', verify, function(req, res, next){
 		console.log("1 record inserted into blacklist");
 	});
 	res.clearCookie("token_cookie");
+	res.clearCookie("username_cookie");
 	res.redirect('/login');
 });
 

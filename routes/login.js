@@ -12,7 +12,7 @@ var jwt = require('../middlewares/jwt.js');
 
 router.get('/', function(req, res){
 	res.render('../public/login.html');
-	console.log("Cookies :  ", req.cookies.token_cookie);
+	console.log("Cookies :  " + req.cookies.token_cookie + " " + req.cookies.username_cookie);
 });
 
 router.post('/', function(req, res){
@@ -40,16 +40,23 @@ router.post('/', function(req, res){
 					});					
 					var token = jwt.sign({user: loginUsername, date: dateOfSign});
 					res.cookie("token_cookie" , token);
+					res.cookie("username_cookie", loginUsername);
 					//res.render('../public/mainmenu.html');
 					res.redirect("/");
 					console.log("Successfully logged in " + loginUsername + " " + token);
 				} else {
 					console.log("Failed to log in " + loginUsername);
-					res.render('../public/mainmenu.html');
+					res.render('../public/login.html',
+					{
+						succ: loginSuccess
+					});
 				};
 			});
 		} else {
-			res.render('../public/mainmenu.html');
+			res.redirect('../public/login.html',
+			{
+				succ: loginSuccess
+			});
 			console.log("Username does not exist " + loginUsername);
 		};	
 	});
