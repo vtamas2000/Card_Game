@@ -11,7 +11,9 @@ var jwt = require('../middlewares/jwt.js');
 });*/
 
 router.get('/', function(req, res){
-	res.render('../public/login.html');
+	res.render('../public/login.html',{
+		succ: null
+	});
 	console.log("Cookies :  " + req.cookies.token_cookie + " " + req.cookies.username_cookie);
 });
 
@@ -46,6 +48,7 @@ router.post('/', function(req, res){
 					console.log("Successfully logged in " + loginUsername + " " + token);
 				} else {
 					console.log("Failed to log in " + loginUsername);
+					loginSuccess = false;
 					res.render('../public/login.html',
 					{
 						succ: loginSuccess
@@ -53,7 +56,7 @@ router.post('/', function(req, res){
 				};
 			});
 		} else {
-			res.redirect('../public/login.html',
+			res.render('../public/login.html',
 			{
 				succ: loginSuccess
 			});
