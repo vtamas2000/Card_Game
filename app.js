@@ -20,6 +20,7 @@ var gameoflife = require('./routes/gameoflife.js');
 var langtonsant = require('./routes/langtonsant.js');
 var mandelbrot = require('./routes/mandelbrot.js');
 var montecarlopi = require('./routes/montecarlopi.js');
+var eratosthenes = require('./routes/eratosthenes.js');
 
 //app.set('socketio', io);
 
@@ -64,6 +65,7 @@ app.use('/gameoflife', gameoflife);
 app.use('/langtonsant', langtonsant);
 app.use('/mandelbrot', mandelbrot);
 app.use('/monte-carlo-pi', montecarlopi);
+app.use('/eratosthenes', eratosthenes);
 	
 http.listen(port);
 
