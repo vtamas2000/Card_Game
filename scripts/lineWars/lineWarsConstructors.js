@@ -63,7 +63,7 @@ function Point(x, y, player, col) {
     } */
 }
 
-function Connection(startPoint, endPoint) {
+function Connection(startPoint, endPoint, col) {
     this.startX = startPoint.x;
     this.startY = startPoint.y;
     this.endX = endPoint.x;
@@ -73,7 +73,7 @@ function Connection(startPoint, endPoint) {
     this.power = 0;
     this.nrOfIntersections = 0;
     this.length = dist(this.startX, this.startY, this.endX, this.endY);
-    this.col = color(52, 26, 219);
+    this.col = col;
     this.belongsTo;
 
     //Visuals go here
