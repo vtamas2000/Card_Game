@@ -38,17 +38,13 @@
 			<form action="/login" method="post">
 				<div class="form-group">
 					<label for="loginUsername">Your Username:</label>
-					<input type="text" name="loginUsername" id="loginUsername" placeholder="Username" required>
+					<input type="text" name="loginUsername" id="loginUsername" placeholder="Username" style="width: 90%" required>
 				</div>
 				<div class="form-group">
 					<label for="loginPassword">Your password:</label>
-					<input type="password" name="loginPassword" id="loginPassword" placeholder="*******" required>
+					<input type="password" name="loginPassword" id="loginPassword" placeholder="*******" style="width: 90%" required>
 				</div>
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" name="stayLoggedIn"> Stay logged in
-					</label>
-				</div>
+				
 				<br>
 				<div id="alertForUnsuccess"></div>
 				<button class="btn btn-primary btn-block btn-lg" type="submt">Login</button>
