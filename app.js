@@ -19,7 +19,7 @@ var linewars = require('./routes/linewars.js');
 var gameoflife = require('./routes/gameoflife.js');
 var langtonsant = require('./routes/langtonsant.js');
 var mandelbrot = require('./routes/mandelbrot.js');
-
+var geneticalgorithm = require('./routes/geneticalgorithm.js');
 //app.set('socketio', io);
 
 app.engine('html', require('ejs').renderFile);
@@ -62,7 +62,7 @@ app.use('/linewars', linewars);
 app.use('/gameoflife', gameoflife);
 app.use('/langtonsant', langtonsant);
 app.use('/mandelbrot', mandelbrot);
-
+app.use('/geneticalgorithm', geneticalgorithm);
 	
 http.listen(port);
 
