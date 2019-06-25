@@ -3,6 +3,7 @@ var numbers = [];
 
 function setup(){
     createCanvas(windowWidth, windowHeight);
+    //createCanvas(600, 600);
     limit = width * height;
     for(var i = 0; i < limit; i++){
         numbers[i] = i;
@@ -10,22 +11,26 @@ function setup(){
 }
 
 function draw(){
-    stroke(getColor());
-    var nextPrime;
-    for(var i = 0; i < limit; i++){
-        if (numbers[i] > 1){
-            nextPrime = i;
-            break;
+    //for(var h = 0; h < 10000; h++){
+        stroke(getColor());
+        var nextPrime;
+        for(var i = 0; i < limit; i++){
+            if (numbers[i] > 1){
+                nextPrime = i;
+                point(getX(i), getY(i));
+                break;
+            }
         }
-    }
 
-    for(var j = nextPrime; j < limit; j = j + nextPrime){
-        point(getX(j), getY(j));
-        //console.log(getX(j) + " " + getY(j));
-        numbers[j] = 0;
-    }
-    /*console.log(getPrime(1000000));
-    noLoop();*/
+        for(var j = nextPrime; j < limit; j = j + nextPrime){
+            point(getX(j), getY(j));
+            //console.log(getX(j) + " " + getY(j));
+            numbers[j] = 0;
+        }
+    //}
+
+    //console.log(getPrime(1000000));
+    //noLoop();
 }
 
 function getColor(){
@@ -76,4 +81,11 @@ function getPrime(max){
             }
         }
     }
+}
+
+function prime(nth){
+    var primes = [];
+    var n = 2;
+    for(var i = 0; i < 32; i++){}
+    
 }
