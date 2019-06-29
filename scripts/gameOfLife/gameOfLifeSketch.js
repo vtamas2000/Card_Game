@@ -74,6 +74,25 @@ function keyPressed(){
     }
 }
 
+function touchStarted(){
+    if (touches.length == 3){
+        started = false;
+        for (var i = 0; i < cols; i++){
+            for (var j = 0; j < rows; j++){
+                grid[i][j] = floor(random(2));
+            }
+        }
+    } 
+
+    if (touches.length == 2){
+        if(!started){
+            started = true;
+        } else {
+            started =  false;
+        } 
+    }
+}
+
 function make2DArray(cols, rows){
     var arr = new Array();
     for(var i = 0; i < cols; i++){
