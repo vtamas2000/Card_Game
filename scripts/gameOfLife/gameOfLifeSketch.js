@@ -91,6 +91,11 @@ function touchStarted(){
             started =  false;
         } 
     }
+
+    if (touches.length == 4){
+        started = false;
+        grid = make2DArray(cols, rows);
+    }
 }
 
 function make2DArray(cols, rows){
